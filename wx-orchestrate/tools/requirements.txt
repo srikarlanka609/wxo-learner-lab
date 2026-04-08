@@ -1,0 +1,6 @@
+requests>=2.31.0
+python-dotenv
+ibm-watsonx-ai
+
+# Optional: For local development/testing only
+# ibm-watsonx-orchestrate
