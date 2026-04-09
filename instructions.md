@@ -2,7 +2,7 @@
 
 
 
-## PART II: Using agents for RAG usecases
+## PART II: Building a document agent analyst to handle all document inquiries
 Suppose, you have different vendor documents and need ...
 In this section, we will build an agent that will use documents as a knowledge base to answer relevant questions...
 
@@ -27,5 +27,9 @@ Once you're environment is activated, you can confirm this by entering
 ... something about you should see some agents from earlier part ...
 
 
-Navigate to your repository and to the ~/wx-orchestrate/agents directory. you should see a YAML file called `document_agent.yaml`
+Navigate to your repository and to the  **~/wx-orchestrate/agents** directory. you should see a YAML file called `document_agent.yaml`
 This file is the blueprint for our agent and we will use the ADK to import this into our environment. 
+
+
+Run the following command to import this agent into the environment: `orchestrate agents import -f document_agent.yaml`
+![image](https://github.ibm.com/user-attachments/assets/82a6fd4e-79ae-454d-bfa7-bf99f08017cf)
