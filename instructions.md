@@ -20,3 +20,12 @@ For initial setup, we recommend the following steps, but if you want to use a di
 These steps will help install the ADK, add & activate your environment, and begin building! 
 
 
+Once you're environment is activated, you can confirm this by entering
+
+`orchestrate agents list`
+
+... something about you should see some agents from earlier part ...
+
+
+Navigate to your repository and to the ~/wx-orchestrate/agents directory. you should see a YAML file called `document_agent.yaml`
+This file is the blueprint for our agent and we will use the ADK to import this into our environment. 
