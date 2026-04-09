@@ -30,6 +30,11 @@ Once you're environment is activated, you can confirm this by entering
 Navigate to your repository and to the  **~/wx-orchestrate/agents** directory. you should see a YAML file called `document_agent.yaml`
 This file is the blueprint for our agent and we will use the ADK to import this into our environment. 
 
+![image](https://github.ibm.com/user-attachments/assets/2e660d5b-bb8f-44f3-9233-5c918f7ff32a)
+
 
 Run the following command to import this agent into the environment: `orchestrate agents import -f document_agent.yaml`
-![image](https://github.ibm.com/user-attachments/assets/82a6fd4e-79ae-454d-bfa7-bf99f08017cf)
+You should see the following message
+![image](https://github.ibm.com/user-attachments/assets/ee9094f4-3d09-45f9-b3eb-c4aa3bdd13d2)
+
+
