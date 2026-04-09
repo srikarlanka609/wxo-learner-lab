@@ -9,7 +9,7 @@ In this section, we will build an agent that will use documents as a knowledge b
 
 ### watsonx Orchestrate ADK
 
-As mentioned above, the ADK allows hosting the core Orchestrate components on a developer laptop. For the lab, you can choose if you want to run the ADK on your own laptop or on a virtual machine that will be provided to you by your instructor. 
+As mentioned above, the ADK allows hosting the core Orchestrate components on a developer laptop. For the lab, you will run the ADK on your own laptop. 
 
 #### Local machine
 
