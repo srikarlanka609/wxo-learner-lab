@@ -57,4 +57,7 @@ Insert the following prompts one-by-one and see how we can answer questions abou
 6. `Compare and contrast the payment structures across all five contracts. Which agreement has the least risk in exceeding a total cost of $2 million?`
 7. `Give me a list of all assets/supported technologies in the software maintenance and perpetual license agreements.`
 
+Now try a completely irrelevant prompt: `What is the capital of France?`  
+you should see that we get a return message `This is out of scope.`
+If you scroll to the Behavior, you should see a Guideline set in place, which is a rule we have to make sure our agent is focusing on just document-related inquiries. 
 
