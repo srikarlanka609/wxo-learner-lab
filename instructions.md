@@ -1,3 +1,6 @@
+## PART I: Building a purchase agent to help users submit requests for new software
+.... some info ....
+In this section, we will build an agent that uses an agentic workflow tool and a 3rd party tool to help users fill out a form for a simple software request and submit a ServiceNow ticket request if criteria is met.
 
 
 
