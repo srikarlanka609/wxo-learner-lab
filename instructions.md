@@ -53,11 +53,50 @@ Insert the following prompts one-by-one and see how we can answer questions abou
 3. `For the agreed upon management of servers, if the average server CPU utilization is 75%, is this permissible?`  
 4. `Tell me the risk management strategy outlined for the on-prem to AWS migration.`
 5. `From the Enterprise Solutions Group vendor point of view, if the customer ask for support on their McAfee security software, is it okay for us to put resources towards this?`  
-
 6. `Compare and contrast the payment structures across all five contracts. Which agreement has the least risk in exceeding a total cost of $2 million?`
 7. `Give me a list of all assets/supported technologies in the software maintenance and perpetual license agreements.`
 
 Now try a completely irrelevant prompt: `What is the capital of France?`  
 you should see that we get a return message `This is out of scope.`
 If you scroll to the Behavior, you should see a Guideline set in place, which is a rule we have to make sure our agent is focusing on just document-related inquiries. 
+
+### Enhancing our agent with an MCP tool
+Currently, our agent is able to answer questions pertaining to each of the five documents and perform some analysis like we've just done so far. While our agent is functional, it is currently limited to our five documents.  
+
+A user may be interested in industry-wide standards, pricing, compliance, or information that can be relevant in analyzing these documents.  
+We can broaden our agent and give it the capability for searching the web through an **MCP Server**
+
+An **MCP Server** is a lightweight program following MCP, an open-protocol created by Anthropic to standardize how AI agents can connect to external data sources and tools. Think of it as an USB flash drive for an AI assistant where different MCP servers contain access to different resources and we can use a flash drive to get access to such resources.
+
+We are going to setup an MCP server and specifically using a searchweb tool so our agent can browse the internet when relevant.  
+
+Scroll to the **Toolset** section and click **Add tool +**.  
+
+![image](https://github.ibm.com/user-attachments/assets/1b998715-0de0-41c0-84fd-a279e21b5b78)
+
+![image](https://github.ibm.com/user-attachments/assets/fcd3fafa-8cb9-476b-bca5-15a03af85d1a)
+
+![image](https://github.ibm.com/user-attachments/assets/ac32ca9c-46f7-47ec-b5d4-011ed88bde63)
+
+Insert the following:  
+**Server Name**: `websearch_mcp`  
+**Install Command**: `npx -y @guhcostan/web-search-mcp`  
+
+Once you add the MCP server you should see a tool for **websearch_mcp:search_web**. Select and click on it to add it to the agent. 
+
+Before we begin using it, let's make sure our agent instructions contain behavior for when we need to use this tool. Go to the **Behavior** section and add the following to the instructions:  
+
+- If a user asks about any of the vendors, clients or project topics that span beyond just the documents such as industry-wide standards, compliance, financial analysis, and competitive analysis, use the `websearch_mcp:search_web` tool to fulfill the request. 
+
+Now, we can refresh and should be able to begin asking questions. Insert the following prompts one-by-one and see how we can use our tool.
+
+1. `Give me some reviews on CloudFirst Consulting Partners Inc?`
+2. `Can you tell me the Oracle database licensing cost per core?`
+3. `What is considered industry-wide network latency acceptable thresholds in cloud computing?`
+
+Great! Now, we have been able to enhance our agent and use it to not just analyze documents, but also help users ask useful, relevant questions in analyzing vendor contracts. 
+
+
+
+
 
