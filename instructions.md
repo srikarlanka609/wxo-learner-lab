@@ -62,6 +62,8 @@ CLient Secret: `ZIB+ALl19Jvg1P@w!8,#G72Z[(WRRTQn`
 Once you saved them, re-open the connection details by clicking on the pencil. From here, select the Live option and click Paste draft configuration.  
 Make sure **Team credentials** is selected for the Credential Type.  
 
+
+### Building our agentic workflow 
 Click on the **hamburger** icon in the top left, then **Build**, then click into **All tools**, then click **Create tool +**, and then **Agentic workflow**
 Add `sw_validator_workflow` as the Name and click **Start Building**  
 ![image](https://github.ibm.com/user-attachments/assets/07f5d680-bb0f-4407-abab-0bcc468c1fe9)  
@@ -71,27 +73,27 @@ If the price is less than 0 (not possible) or greater than or equal to 10000 (to
 If we are able to meet the price condition, we will ask a second question about how many licenses are needed.  
 If we need greater than 0 and less than or equal to 1000 licenses, we can successfully continue and be prompted with a ServiceNow ticket to complete regarding this request.  
 
-Step 1. Let's begin our workflow by including a welcome message.
+**Step 1**. Let's begin our workflow by including a welcome message.
 Click on the **Add +** button, then under User Actvities, hover over **Present to user** and select **Message**  
 Now click on the the green **Message 1** box and click on the pencil to rename the message box. Paste the following in the output message 
 Output message: `Welcome! Let's validate this request!`  
 ![image](https://github.ibm.com/user-attachments/assets/e685e465-e741-4d28-87f7-9f4d094ea6d1)  
 
-Step 2. Now, click on the **+** sign between the **welcome** and **End** button.  
+**Step 2**. Now, click on the **+** sign between the **welcome** and **End** button.  
 This time, we will begin with our first question so hover over **Collect from user** and click **Number** since we will be asking for price.
 Click on the pencil icon and rename the name to `What is the USD cost for this software?`
 
 Here's what our workflow should look like right now.  
 ![image](https://github.ibm.com/user-attachments/assets/85753918-5cfa-45b1-b245-4b1e69392144)  
 
-Step 3. Now we are going to track the value of the user response in a variable using a logic block so we can use this later on. 
+**Step 3**. Now we are going to track the value of the user response in a variable using a logic block so we can use this later on. 
 Similar to the steps above, click the **+** button under the `What is the USD cost for this software?` block. 
 Hover over **Add a flow activity** and click **Logic block**  
 You will then click on the code editor and can delete all of the pre-existing code.
 Paste `flow.private.cost = flow["User activity 1"]["What is the USD cost for this software?"].output.value`
 ![image](https://github.ibm.com/user-attachments/assets/841c89cd-9e36-4f3a-a5c2-9c1b91b34e1c)  
 
-Step 4. Next, we will add a branch where we can actually evaluate the user input using our variable above.
+**Step 4**. Next, we will add a branch where we can actually evaluate the user input using our variable above.
 Similar to the steps above, click the **+** button under the **Logic Block 1** block.  
 Hover over **Add a flow control** and click **Branch**  
 Click into the **Branch 1** object and under the if else Path conditions, click **Edit condition**  
@@ -103,40 +105,43 @@ Now click, if value >= 0, click out, and then click **Add condition +** and repe
 Feel free to rename **Path 1** and **Path 2** in the Branch by clicking the names directly to `Cost satisfied` and `Cost criteria not` 
 You will now see 2 different paths, based on the outcome from the above.  
 
-Step 5. Click on the green **Add +** button and follow the steps we used in step 1 
+**Step 5**. Click on the green **Add +** button and follow the steps we used in step 1 
 ![image](https://github.ibm.com/user-attachments/assets/9e229645-ee45-4aab-a7c9-2e112cf3e252)
 This time, use output message: `Cost is invalid or too expensive! Criteria is not met.` and title `Cost not met`
 Essentially, if the cost is too expensive or invalid, the user is presented this message and the flow ends. 
 
-Step 6. Under Branch 1, click the **+** button and add a follow up question. This is the case where the price critiera was met so we can continue evaluating if this request is permissible. 
+**Step 6**. Under Branch 1, click the **+** button and add a follow up question. This is the case where the price critiera was met so we can continue evaluating if this request is permissible. 
 Click **+**, hover over **Collect from user** and click **Number** since we will be asking for number of licenses.
 Follow the steps in step 2 but instead use rename the block to `How many licenses are needed?`  
 
-Step 7. Now, we will similarly track the variable value like we did for cost, so follow the step 3
+**Step 7**. Now, we will similarly track the variable value like we did for cost, so follow the step 3
 ![image](https://github.ibm.com/user-attachments/assets/0efddc54-33ea-42f0-a11b-cdaad900caec)
 
 You can also delete everything in the default code editor and just have this:
 `flow.private.num_licenses = flow["User activity 1"]["How many licenses are needed?"].output.value`  
 
-Step 8. Now that we have a logic block, we will add another branch based on how many licenses are needed.  
+**Step 8**. Now that we have a logic block, we will add another branch based on how many licenses are needed.  
 If we need 1-1000 licenses (inclusive), then criteria is met. Otherwise, we cannot continue. 
 Follow Step 4, but use value > 0 and value < 1000 instead. Here's what your branch block should include.  
 ![image](https://github.ibm.com/user-attachments/assets/4824a169-9961-4574-81cb-85635578695c)
 
-Step 9. We will 
+**Step 9**. We will follow Step 5, but instead create a criteria not met display message for our number of licenses question.  
+Follow Step 5 but use title: `Licenses not met` and Output message: `The number of licenses is either invalid or too many! Criteria is not met.`  
+![image](https://github.ibm.com/user-attachments/assets/1d6d3543-9222-4fc5-986c-c2aa0c16c7af)
+
+**Step 10**. Let's add a display message under the path where the criteria for number of licenses was met. 
+Follow steps 5/9 above for how we would build a display message but use title: `Criteria met` and output message: `Criteria met! We will now fill out a ServiceNow Ticket.` 
+![image](https://github.ibm.com/user-attachments/assets/f5cfc83c-d8e1-4c76-8aa1-45e8ffa67003)  
+
+**Step 11**. The last step in completing our workflow is now adding in our ServiceNow tool. 
+Under the `Criteria met` box, let's add a tool call. We can do this by click **+**, **Call a tool**, and select **Create a ticket in ServiceNow**.  Click the **Done** button in the top right 
+![image](https://github.ibm.com/user-attachments/assets/362e06f4-6f4c-4e95-b956-7d65148ef315)
 
 
-
-
-
-Here's what the final workflow should look like.  
+Here's what our final workflow should look like.  
 ![image](https://github.ibm.com/user-attachments/assets/bf12e34a-e1e1-445b-b839-fb1997354548)
 
 
-
-### Building our agentic workflow
-
-Go back to
 
 
 
