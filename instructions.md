@@ -1,6 +1,67 @@
 ## PART I: Building a purchase agent to help users submit requests for new software
-.... some info ....
-In this section, we will build an agent that uses an agentic workflow tool and a 3rd party tool to help users fill out a form for a simple software request and submit a ServiceNow ticket request if criteria is met.
+To kickoff the lab, we want to build an agent that can help us handle purchase requests. Imagine a user wants to purchase some new software but there are criteria we want to check on to reduce unneccessary approvals.  
+In this section, we will build an agent that uses an agentic workflow tool and a 3rd party tool to help users fill out a form for a simple software request and submit a ServiceNow ticket request if criteria is met.  
+
+### Build our purchase_agent the UI  
+Click on the **hamburger** icon in the top left, then **Build**, then **Create agent +**, then **Create from scratch**, and enter the following  
+Name: `purchase_agent`  
+Description: `This agent will be used to help answer inquiries related to submitting a request for new purchase of software.`  
+Once you are done, click into **Behavior** and paste the following
+
+```
+==========================================================
+  SYSTEM PROMPT — SOFTWARE PURCHASE VALIDATOR
+  ==========================================================
+  GREETING BEHAVIOUR
+  - If the user says “hi” or “hello”, respond with:
+    "Hello, I am here to help you validate your software request." 
+
+  GLOBAL RULES (STRICT)
+  - Always acknowledge the user politely
+  - Ask ONE question at a time
+  - Always use American English
+
+STEP 1: invoke the `sw_validator_workflow`
+STEP 2: upon completion, return to user "Complete!"
+```  
+
+### ServiceNow Agent setup
+Now that we have our basic agent blueprint mapped out, we can begin by adding the additional tools and catalog agents we will need to use it successfully.
+Go back to the **hamburger** icon in the top left, then **Build**, then **Create agent +**, then **Start with a template** tab.  
+
+
+Follow the below steps to add in our ServiceNow agent that we can use in collaboration to help the management of tickets
+
+![image](https://github.ibm.com/user-attachments/assets/e50bac71-35ca-451f-886f-477480d25212)
+Search for ServiceNow in the search bar and scroll down to the Ticket Manager Agent  
+![image](https://github.ibm.com/user-attachments/assets/ee2fa2e8-1ad6-439e-b363-a7c0910fa70f)
+
+![image](https://github.ibm.com/user-attachments/assets/a1a1f476-7a12-4955-8895-7a8085a0f165)  
+
+Click on the Ticket Manager Agent and then click on Use as Template. These agents are ready to use agents that can also serve as templates if you need specific functionality within your connections, apps etc. For the purpose of this lab, we will not be editing this agent at all, however depending on your use case you can edit every single detail within this agent.
+
+![image](https://github.ibm.com/user-attachments/assets/31f0b422-55b3-40b3-9b88-f38d5bb5ca27)
+
+Scroll down to Toolset. Click on the three dots next to the **Create a ticket in ServiceNow** tool and then Edit details
+![image](https://github.ibm.com/user-attachments/assets/e15402a8-a92e-45f9-ae79-9f9dccc4f0e1)  
+
+Choose the **Connectors** option and click on the pencil to edit.  
+![image](https://github.ibm.com/user-attachments/assets/cf2a63cf-2b8a-47de-8e9d-01f70064a428)  
+
+Choose **Oauth2 Authorization Code**
+![image](https://github.ibm.com/user-attachments/assets/c552f52a-6e7c-456c-8fc1-86c74739de3e)
+Fill out the following information and select on the **Team credentials** option, then click Save changes  
+
+Server URL: `https://dev281392.service-now.com/`  
+Token URL: `https://dev281392.service-now.com/oauth_token.do`
+Authorization URL: `https://dev281392.service-now.com/oauth_auth.do`  
+Client ID: `6150dca3213d4941957b1c89c83ee49b`  
+CLient Secret: `ZIB+ALl19Jvg1P@w!8,#G72Z[(WRRTQn`  
+
+
+Once you saved them, re-open the connection details by clicking on the pencil. From here, select the Live option and click Paste draft configuration.  
+Make sure **Team credentials** is selected for the Credential Type.  
+
 
 
 
