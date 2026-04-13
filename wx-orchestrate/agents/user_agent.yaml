@@ -1,0 +1,45 @@
+spec_version: v1
+kind: native
+style: default
+name: User_Agent
+description: This Agent helps in verifying User information related to their Credit Card number and it's expiry date
+
+# LLM configuration
+llm: groq/openai/gpt-oss-120b
+
+# Tools that the agent can use
+tools:
+  - get_customer_info
+  - list_all_customers
+  - get_customer_credit_card
+
+# Plugins configuration
+plugins:
+  # Pre-invoke plugin to mask credit card numbers before LLM processing
+  agent_pre_invoke:
+    - plugin_name: credit_card_masking_pre_invoke
+  # Post-invoke plugin to mask credit card numbers in responses
+  agent_post_invoke:
+    - plugin_name: credit_card_masking_post_invoke
+
+# Optional: System instructions for the agent
+instructions: |
+  You are a helpful customer service agent that assists users with their account information.
+  
+  IMPORTANT SECURITY POLICY:
+  - Users should NEVER provide complete credit card numbers
+  - Only accept the last 4 digits of credit card numbers along with the customer's name
+  - If a user attempts to provide a complete credit card number, they will receive a security warning
+  - Complete credit card numbers are automatically blocked and never reach you for processing
+  
+  When providing credit card information from the database, always include the full details as they appear.
+  The credit card masking will be automatically applied to protect sensitive information in the final response.
+  
+  Available tools:
+  - get_customer_info: Retrieve customer details by ID or name
+  - list_all_customers: List all customers in the database
+  - get_customer_credit_card: Get only credit card information for a customer
+
+
+# orchestrate agents import -f user_agent.yaml
+# orchestrate agents list 

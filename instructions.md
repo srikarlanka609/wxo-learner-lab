@@ -239,4 +239,38 @@ Great! Now, we have been able to enhance our agent and use it to not just analyz
 
 
 
+## PART III: Building A User Agent to confirm credit card requirements
+
+In this section, we will build a user agent that can confirm if the user has a credit card on file and if the credit card is active and can be used by systems. We will use a plug-in guardrail to ensure at no point the entire credit card number is leaked to the agent.
+
+#### Import Credit Card Check Plugin
+orchestrate tools import -k python -f credit_card_masking_plugin.py
+
+-- This plugin will mask the credit card number in the agent response and user query and also mention the safety measure by prompting the user to not share the credit card number.
+
+#### Import User Tools
+orchestrate tools import -k python -f customer_query_tool_package/customer_query_tool.py -p customer_query_tool_package
+
+-- This tool will help the agent interact with an sqlite database to check if the user has a credit card on file and if the credit card is active and can be used by systems.
+
+
+#### Verify tools imports
+orchestrate tools list
+
+#### Create agent
+orchestrate agents create -f user_agent.yaml
+
+--- This will create a user agent that can confirm if the user has a credit card on file and if the credit card is active and can be used by systems. Some sample prompts:
+  " Do I have an active credit card on file? My Name is Vaisakhi Mishra "
+  " Do I have an active credit card on file? My Name is John Smith "
+  " Is my credit card 3782-3456-7890-1234 still active? "
+  " Is my credit card 4532-1234-5678-9010 on file? "
+  " When does my credit card 4532123456789010 expire? "
+
+
+#### Verify deployment
+orchestrate agents list
+
+
+
 
