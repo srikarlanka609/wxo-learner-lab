@@ -244,22 +244,23 @@ Great! Now, we have been able to enhance our agent and use it to not just analyz
 In this section, we will build a user agent that can confirm if the user has a credit card on file and if the credit card is active and can be used by systems. We will use a plug-in guardrail to ensure at no point the entire credit card number is leaked to the agent.
 
 ### Orchestrate Plugins
-Watson Orchestrate plug-ins play a role in enhancing the capabilities and robustness of agents. They help enable custom behavior to be easily added to an agent’s processing flow, allowing modifications to incoming input or outgoing output. This customization is essential for applications where agents must comply with safety, security, and regulatory requirements. Plug-ins protect the agent from problematic inputs by filtering or sanitizing content and enforce compliance by applying guardrails to sensitive or restricted information. For this lab we would be tackling pre and post invoke issue with sensitive information like credit card numbers.
-For this section of the lab we would be be using the ADK to deploy everything and then verify the agent on the Watson Orchestrate UI.
+- Watson Orchestrate plug-ins play a role in enhancing the capabilities and robustness of agents. They help enable custom behavior to be easily added to an agent’s processing flow, allowing modifications to incoming input or outgoing output. This customization is essential for applications where agents must comply with safety, security, and regulatory requirements. Plug-ins protect the agent from problematic inputs by filtering or sanitizing content and enforce compliance by applying guardrails to sensitive or restricted information. 
+- For this lab we would be tackling pre and post invoke issue with sensitive information like credit card numbers. Also, for this section of the lab we would be be using the ADK to deploy everything and then verify the agent on the Watson Orchestrate UI.
 
 #### Import Credit Card Check Plugin
 orchestrate tools import -k python -f credit_card_masking_plugin.py
 
--- This plugin will mask the credit card number in the agent response and user query and also mention the safety measure by prompting the user to not share the credit card number.Got through the credit_card_masking_plugin.py to understand how the masking function is used for ensuring secure messages.
+- This plugin will mask the credit card number in the agent response and user query and also mention the safety measure by prompting the user to not share the credit card number.Got through the credit_card_masking_plugin.py to understand how the masking function is used for ensuring secure messages.
 
 #### Import User Tools
 orchestrate tools import -k python -f customer_query_tool_package/customer_query_tool.py -p customer_query_tool_package
 
--- This tool file will help the agent interact with an sqlite database to check if the user has a credit card on file and if the credit card is active and can be used by systems. This will upload three tools 
+- This tool file will help the agent interact with an sqlite database to check if the user has a credit card on file and if the credit card is active and can be used by systems. This will upload three tools 
     - `get_customer_info` - Query customer by ID or name
     - `list_all_customers` - List all customers in database
     - `get_customer_credit_card` - Get credit card info for a customer
---- When tools are deployed to Watson Orchestrate, they run in isolated containerized environments. Hence we can deploy all the dependencies in the tools folder and add the package to the tool deployment on the ADK (the approach we used here to ensure the db is accessible to the tool) If you have specific package requirements, you would also add the requirements.txt to this folder - customer_query_tool_package
+
+- When tools are deployed to Watson Orchestrate, they run in isolated containerized environments. Hence we can deploy all the dependencies in the tools folder and add the package to the tool deployment on the ADK (the approach we used here to ensure the db is accessible to the tool) If you have specific package requirements, you would also add the requirements.txt to this folder - customer_query_tool_package
 
 
 #### Verify tools imports
@@ -268,7 +269,7 @@ orchestrate tools list
 #### Create agent
 orchestrate agents create -f user_agent.yaml
 
---- This will create a user agent that can confirm if the user has a credit card on file and if the credit card is active and can be used by systems. Some sample prompts:
+- This will create a user agent that can confirm if the user has a credit card on file and if the credit card is active and can be used by systems. Some sample prompts:
   1. " Do I have an active credit card on file? My Name is Vaisakhi Mishra "
   2. " Do I have an active credit card on file? My Name is John Smith "
   3. " Is my credit card 3782-3456-7890-1234 still active? "
