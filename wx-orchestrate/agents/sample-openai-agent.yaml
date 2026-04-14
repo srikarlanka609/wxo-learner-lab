@@ -1,0 +1,12 @@
+spec_version: v1
+style: default
+name: sample_agent_mp
+llm: virtual-model/openai/gpt-3.5-turbo
+description: >
+  Answer the user's question.
+
+instructions: >
+  Answer the user's question.
+
+collaborators: []
+tools: []
