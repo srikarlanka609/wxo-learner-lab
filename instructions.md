@@ -257,37 +257,37 @@ Each of these are different contractual agreements between a vendor and client, 
 
 Insert the following prompts one-by-one and see how we can answer questions about our five documents.
 
-#### 1. 
+#### Prompt 1. 
 ```
 Does CloudTech Solutions Inc retain any right in having Global Manufacturing Corporation's data outside of providing required services?
 ```
-#### 2. 
+#### Prompt 2. 
 ```
 Within how many days should the licensor DataVault deliver the software to the licensee Regional Health Care and it what forms can it be delivered?
 ```  
-#### 3
+#### Prompt 3
 ```
 For the agreed upon management of servers, if the average server CPU utilization is 75%, is this permissible?
 ```  
-#### 4
+#### Prompt 4
 ```
 Tell me the risk management strategy outlined for the on-prem to AWS migration.
 ```
-#### 5
+#### Prompt 5
 ```
 From the Enterprise Solutions Group vendor point of view, if the customer ask for support on their McAfee security software, is it okay for us to put resources towards this?
 ```  
-#### 6
+#### Prompt 6
 ```
 Compare and contrast the payment structures across all five contracts. Which agreement has the least risk in exceeding a total cost of $2 million?
 ```
-#### 7
+#### Prompt 7
 ```
 Give me a list of all assets/supported technologies in the software maintenance and perpetual license agreements.
 ```
 
 Now try a completely irrelevant prompt: `
-#### 8
+#### Prompt 8
 ```
 What is the capital of France?
 ```  
@@ -338,17 +338,17 @@ If a user asks about any of the vendors, clients or project topics that span bey
 
 Now, we can refresh and should be able to begin asking questions. Insert the following prompts one-by-one and see how we can use our tool.
 
-#### 1
+#### Prompt 1
 ```
 Give me some reviews on CloudFirst Consulting Partners Inc?
 ```
 
-#### 2
+#### Prompt 2
 ```
 Can you tell me the Oracle database licensing cost per core?
 ```
 
-#### 3
+#### Prompt 3
 ```
 What is considered industry-wide network latency acceptable thresholds in cloud computing?
 ```
@@ -398,23 +398,28 @@ orchestrate agents create -f user_agent.yaml
 ```
 
 - This will create a user agent that can confirm if the user has a credit card on file and if the credit card is active and can be used by systems. Some sample prompts:
-  
+
+#### Prompt 1
 ```
 Do I have an active credit card on file? My Name is Vaisakhi Mishra
 ```
 
+#### Prompt 2
 ```
 Do I have an active credit card on file? My Name is John Smith
 ```
 
+#### Prompt 3
 ```
 Is my credit card 3782-3456-7890-1234 still active?
 ```
 
+#### Prompt 4
 ```
 Is my credit card 4532-1234-5678-9010 on file?
 ```
 
+#### Prompt 5
 ```
 When does my credit card 4532123456789010 expire?
 ```
