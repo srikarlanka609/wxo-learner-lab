@@ -287,5 +287,10 @@ orchestrate agents list
 ## PART IV: Connecting to External Systems
 
 
+### Connecting to Slack
+
+### Connecting to OpenAI LLMs
+
+
 
 
