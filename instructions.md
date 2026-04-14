@@ -52,16 +52,19 @@ Choose **Oauth2 Authorization Code**
 ![image](https://github.ibm.com/user-attachments/assets/c552f52a-6e7c-456c-8fc1-86c74739de3e)
 Fill out the following information and select on the **Team credentials** option, then click Save changes  
 
-Server URL: `https://dev281392.service-now.com/`  
-Token URL: `https://dev281392.service-now.com/oauth_token.do`
-Authorization URL: `https://dev281392.service-now.com/oauth_auth.do`  
-Client ID: `6150dca3213d4941957b1c89c83ee49b`  
-CLient Secret: `ZIB+ALl19Jvg1P@w!8,#G72Z[(WRRTQn`  
-
+Server URL: `https://dev212075.service-now.com/`  
+Token URL: `https://dev212075.service-now.com/oauth_token.do`
+Authorization URL: `https://dev212075.service-now.com/oauth_auth.do`  
+Client ID: `eb11f37583d44017b2a38a3b00595e5b`  
+CLient Secret: `5v9Qg1Y(5k8rX.QcOPE0]5Rr.8N-AUC`  
 
 Once you saved them, re-open the connection details by clicking on the pencil. From here, select the Live option and click Paste draft configuration.  
 Make sure **Team credentials** is selected for the Credential Type.  
 
+After the you try to connect, you have to log in with the following and accept:
+
+username: `admin`  
+password: `GZ%*8cmWmdB3`  
 
 ### Building our agentic workflow 
 Click on the **hamburger** icon in the top left, then **Build**, then click into **All tools**, then click **Create tool +**, and then **Agentic workflow**
