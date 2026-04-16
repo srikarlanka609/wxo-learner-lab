@@ -232,7 +232,7 @@ Once you're environment is activated, you can confirm this by entering
 orchestrate agents list
 ```
 
-... something about you should see some agents from earlier part ...
+You should see a couple of agents from our previous lab portion, namely the ServiceNow ticket manager agent and the ServiceNow agent.  
 
 
 Navigate to your repository and to the  `~/wx-orchestrate/agents` directory. you should see a YAML file called `document_agent.yaml`
