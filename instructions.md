@@ -267,7 +267,7 @@ Within how many days should the licensor DataVault deliver the software to the l
 ```  
 #### Prompt 3
 ```
-For the agreed upon management of servers, if the average server CPU utilization is 75%, is this permissible?
+If I am requesting additional services in the managed services agreement, how much will 3 senior engineers and 1 technician for 8 hours cost on a standard non-holiday weekday?
 ```  
 #### Prompt 4
 ```
