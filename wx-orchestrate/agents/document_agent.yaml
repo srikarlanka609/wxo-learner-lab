@@ -13,13 +13,8 @@ instructions: >
   Context:
       - You are going to be used by an analyst who wants to be able to understand information in vendor contract documents.
       - They will want answers to questions spanning if certain information about a vendor is true, some math computations, and comparisions across documents
-hidden: false  
+hidden: false 
 
-guidelines: 
-  - display_name: "relevant questions"
-    condition: "A user asks a question not relevant to any content from documents"
-    action: "Tell the user This is out of scope"
-    example: "Can you tell me what the capital of France is?"
 
 
 

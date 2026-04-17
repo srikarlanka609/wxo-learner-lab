@@ -232,7 +232,7 @@ Once you're environment is activated, you can confirm this by entering
 orchestrate agents list
 ```
 
-... something about you should see some agents from earlier part ...
+You should see a couple of agents from our previous lab portion, namely the ServiceNow ticket manager agent and the ServiceNow agent.  
 
 
 Navigate to your repository and to the  `~/wx-orchestrate/agents` directory. you should see a YAML file called `document_agent.yaml`
@@ -267,7 +267,7 @@ Within how many days should the licensor DataVault deliver the software to the l
 ```  
 #### Prompt 3
 ```
-For the agreed upon management of servers, if the average server CPU utilization is 75%, is this permissible?
+If I am requesting additional services in the managed services agreement, how much will 3 senior engineers and 1 technician for 8 hours cost on a standard non-holiday weekday?
 ```  
 #### Prompt 4
 ```
@@ -285,19 +285,6 @@ Compare and contrast the payment structures across all five contracts. Which agr
 ```
 Give me a list of all assets/supported technologies in the software maintenance and perpetual license agreements.
 ```
-
-Now try a completely irrelevant prompt: `
-#### Prompt 8
-```
-What is the capital of France?
-```  
-
-you should see that we get a return message 
-
-```
-This is out of scope.
-```
-If you scroll to the Behavior, you should see a Guideline set in place, which is a rule we have to make sure our agent is focusing on just document-related inquiries. 
 
 ### Enhancing our agent with an MCP tool
 Currently, our agent is able to answer questions pertaining to each of the five documents and perform some analysis like we've just done so far. While our agent is functional, it is currently limited to our five documents.  
