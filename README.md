@@ -799,8 +799,15 @@ To create a Slack app, you can go to this link: [https://api.slack.com/apps](htt
 
 ![slack_create_new_app](./assets/connect_slack/slack_create_new_app.png)
 
+Next click on `From scratch` and then click on the `test` workspace and give your app a name (this will be the visible name of the bot)
 
+![slack_name](./assets/connect_slack/slack_name.png)
 
+Now, with your app created, click on Next on the Orchestrate `Configure Slack - Draft` steps and fill out the information/proceed with 1, 2, and 3.
+
+> **Tips**
+
+> When copying and pasting the events link, make sure the id gets passed between slack/.../events/ (i.e. https://channels.us-south.watson-orchestrate.cloud.ibm.com/tenants/.../agents/.../environments/.../events). Also, feel free to reinstall the applications once the configuration is complete.
 
 
 ### Connecting to OpenAI LLMs
