@@ -562,7 +562,7 @@ cd wxo-learner-lab/wx-orchestrate/agents
 
 [This file](./wx-orchestrate/agents/document_agent.yaml) is the blueprint for our agent and we will use the ADK to import this into our environment. 
 
-Click into it/open the yaml file and add your initials after the `name`.
+Click into it/open the yaml file and add your initials after the `name` and save.
 
 ![document_agent_yaml](./assets/part_two/document_agent_yaml.png)
 
@@ -576,11 +576,31 @@ You should see the following message
 
 
 ### Modify agent in the UI
-Go back into your orchestrate instance, refresh and your `document_agent` should be there. Click into it, and scroll down to the `Knowledge` portion. Click `Add source +`, then `New knowledge`, `Upload files`, and attach the five provided documents that you have downloaded. 
+Go back into your orchestrate instance and view your agents. 
 
+> You can either navigate using the methods above or click on the following [link](https://us-south.watson-orchestrate.cloud.ibm.com/build/manage).
+
+Refresh and your `document_agent` should be there. 
+
+Click into it, and scroll down to the `Knowledge` portion. 
+
+Click `Add source +`, then `New knowledge`, `Upload files`, and attach the five provided documents that you have downloaded (the documents can be found here [~/wx-orchestrate/documents](./wx-orchestrate/documents/)). 
+
+Once added, you can `Next` and give it a `Name` and `Description` and then `Save`. 
+
+`Name`:
+
+```
+Documents
+```
+
+`Description`
+
+```
 Each of these are different contractual agreements between a vendor and client, laying out all expectations requirements, and agreed-upon goals. Each of these five files have different formatting, structure, and amount of information that represents inherent differences in contract structure. 
+```
 
-Insert the following prompts one-by-one and see how we can answer questions about our five documents.
+Now feel free test in the `Preview` window, insert the following prompts one-by-one and see how we can answer questions about our five documents.
 
 #### Prompt 1. 
 ```
@@ -679,12 +699,14 @@ Watson Orchestrate plug-ins play a role in enhancing the capabilities and robust
 > For this lab we would be tackling pre and post invoke issue with sensitive information like credit card numbers. 
 > Also, for this section of the lab we would be be using the ADK to deploy everything and then verify the agent on the Watson Orchestrate UI.
 
+Start the lab by opening a terminal with `~/wx-orchestrate/tools`.
+
 #### Import Credit Card Check Plugin
 ```bash
 orchestrate tools import -k python -f credit_card_masking_plugin.py
 ```
 
-- This plugin will mask the credit card number in the agent response and user query and also mention the safety measure by prompting the user to not share the credit card number.Got through the credit_card_masking_plugin.py to understand how the masking function is used for ensuring secure messages.
+- This plugin will mask the credit card number in the agent response and user query and also mention the safety measure by prompting the user to not share the credit card number. Got through the credit_card_masking_plugin.py to understand how the masking function is used for ensuring secure messages.
 
 #### Import User Tools
 ```bash
@@ -705,11 +727,22 @@ orchestrate tools list
 ```
 
 #### Create agent
+First navigate to agents directory and then run the import command.
+```
+cd ../agents/
+```
+
 ```bash
-orchestrate agents create -f user_agent.yaml
+orchestrate agents import -f user_agent.yaml
 ```
 
 - This will create a user agent that can confirm if the user has a credit card on file and if the credit card is active and can be used by systems. Some sample prompts:
+
+Go back into your orchestrate instance and view your agents. 
+
+> You can either navigate using the methods above or click on the following [link](https://us-south.watson-orchestrate.cloud.ibm.com/build/manage).
+
+Click into your `user_agent` and then paste in the `Preview` window the following prompts:
 
 #### Prompt 1
 ```
