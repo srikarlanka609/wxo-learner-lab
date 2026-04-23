@@ -801,7 +801,7 @@ To create a Slack app, you can go to this link: [https://api.slack.com/apps](htt
 
 Next click on `From scratch` and then click on the `test` workspace and give your app a name (this will be the visible name of the bot)
 
-![slack_name](./assets/connect_slack/slack_name.png)
+![slack_name](./assets/connect_slack/slack-name.png)
 
 Now, with your app created, click on Next on the Orchestrate `Configure Slack - Draft` steps and fill out the information/proceed with 1, 2, and 3.
 
