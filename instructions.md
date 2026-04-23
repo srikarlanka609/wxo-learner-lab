@@ -1,10 +1,50 @@
+## PART 0: Setting up the environment
+
+First start by getting your IBM `IAM API Key` with the steps in the [Get IAM API Key](./get-iam-api-key.md) page.
+
+Next start by navigating to the [IBM Cloud Dashboard](https://cloud.ibm.com/) and click on the `Hamburger` icon in the top left. 
+
+![ibm-cloud-home](./assets/ibm-cloud-hamburger.png)
+
+Click on the `Resource list` tab.
+
+![ibm-cloud-navigate-to-resource-list](./assets/ibm-cloud-navigate-to-resource-list.png)
+
+Now you should see a list of drop downs and be on the [https://cloud.ibm.com/resources](https://cloud.ibm.com/resources).
+
+Click on the `AI / Machine Learning` drop down and then click on the `watsonx Orchestrate-nsrpoc` link.
+
+![ibm-cloud-resource-list](./assets/cloud-resource-list.png)
+
+> It should be titled: `watsonx Orchestrate-nsrpoc` but if you do not see that click on the one which has `watsonx Orchestrate` as the Product.
+
+Now, you can click on the `Launch watsonx Orchestrate` button and proceed to the next phase.
+
+![ibm-cloud-launch-orchestrate](./assets/cloud-wxo.png)
+
 ## PART I: Building a purchase agent to help users submit requests for new software
 To kickoff the lab, we want to build an agent that can help us handle purchase requests. Imagine a user wants to purchase some new software but there are criteria we want to check on to reduce unneccessary approvals.  
 
 In this section, we will build an agent that uses an agentic workflow tool and a 3rd party tool to help users fill out a form for a simple software request and submit a ServiceNow ticket request if criteria is met.  
 
+> Your starting point should be [https://us-south.watson-orchestrate.cloud.ibm.com/chat](https://us-south.watson-orchestrate.cloud.ibm.com/chat), 
+
+> You can navigate there following the steps in [Part 0](#part-0-setting-up-the-environment)
+
 ### Build our purchase_agent the UI  
-Click on the `hamburger` icon in the top left, then `Build`, then `Create agent +`, then `Create from scratch`, and enter the following  
+Click on the `hamburger` icon in the top left.
+
+![wxo-hamburger](./assets/part_one/wxo-hamburger.png)
+
+Then `Build`
+
+![wxo-build](./assets/part_one/wxo-build.png)
+
+Then `Create agent +`
+
+![wxo-agents-home](./assets/part_one/wxo-agents-home.png)
+
+Select `Create from scratch`, and enter the following  
 Name: 
 ```
 purchase_agent
@@ -13,7 +53,12 @@ Description:
 ```
 This agent will be used to help answer inquiries related to submitting a request for new purchase of software.
 ```  
-Once you are done, click into `Behavior` and paste the following
+
+Once you are done, hit `Create`
+
+![wxo-create-first-agent](./assets/part_one/wxo-create-first-agent.png)
+
+Next, click into `Behavior` and paste the following
 
 ```
 ==========================================================
@@ -32,39 +77,54 @@ STEP 1: invoke the `sw_validator_workflow`
 STEP 2: upon completion, return to user "Complete!"
 ```  
 
+![wxo-behavior-first-agent](./assets/part_one/wxo-behavior-first-agent.png)
+
 ### ServiceNow Agent setup
 Now that we have our basic agent blueprint mapped out, we can begin by adding the additional tools and catalog agents we will need to use it successfully.
 
-Go back to the `hamburger` icon in the top left, then `Build`, then `Create agent +`, then `Start with a template` tab.  
+> For reference, only one user on the Instance needs to complete the following steps. Since we are sharing a workspace, we can all reference the tools and connections created by someone on this instance.
 
+Go back to the `hamburger` icon in the top left. 
 
-Follow the below steps to add in our ServiceNow agent that we can use in collaboration to help the management of tickets
+![wxo-agent-hamburger](./assets/part_one/wxo-agent-hamburger.png)
 
-![image](./assets/1.png)
+Click on `Build`
 
-Search for ServiceNow in the search bar and scroll down to the Ticket Manager Agent  
+![wxo-agent-build](./assets/part_one/wxo-agent-build.png)
 
-![image](./assets/2.png)
+Click on `Create agent +`
 
-![image](./assets/3.png)  
+![wxo-agents-home](./assets/part_one/wxo-agents-home.png)
 
-Click on the Ticket Manager Agent and then click on Use as Template. These agents are ready to use agents that can also serve as templates if you need specific functionality within your connections, apps etc. For the purpose of this lab, we will not be editing this agent at all, however depending on your use case you can edit every single detail within this agent.
+Click on`Start with a template` tab.  
 
-![image](./assets/4.png)
+![wxo-create-from-template](./assets/part_one/wxo-create-from-template.png)
 
-Scroll down to Toolset. Click on the three dots next to the `Create a ticket in ServiceNow` tool and then Edit details
+Follow the below steps to add in our ServiceNow agent that we can use in collaboration to help the management of tickets.
 
-![image](./assets/5.png)  
+Search for `ServiceNow` in the search bar and scroll down to the `Ticket Manager Agent`. 
 
-Choose the `Connectors` option and click on the pencil to edit.  
+![wxo-catalog-search-servicenow](./assets/part_one/wxo-catalog-search-servicenow.png)
 
-![image](./assets/6.png)  
+Click on the `Ticket Manager Agent` and then click on `Use as Template`.
 
-Choose `Oauth2 Authorization Code`
+![wxo-use-template-servicenow](./assets/part_one/wxo-use-template-servicenow.png)
 
-![image](./assets/7.png)
+> These agents are ready to use agents that can also serve as templates if you need specific functionality within your connections, apps etc. For the purpose of this lab, we will not be editing this agent at all, however depending on your use case you can edit every single detail within this agent.
 
-Fill out the following information and select on the `Team credentials` option, then click Save changes  
+Scroll down or click on `Toolset`. Click on the `three dots` next to the `Create a ticket in ServiceNow` tool and then `Edit details`.
+
+![wxo-tools-edit-details-servicenow](./assets/part_one/wxo-tools-edit-details-servicenow.png)
+
+Choose the `Connectors` option and click on the `Pencil` to edit.  
+
+![wxo-tools-edit-connections](./assets/part_one/wxo-tools-edit-connection.png)  
+
+Choose `Oauth2 Authorization Code`.
+
+![wxo-tools-authentication-type](./assets/part_one/wxo-tools-authentication-type.png)
+
+Fill out the following information and select on the `Team credentials` option.
 
 Server URL: 
 ```
@@ -87,155 +147,403 @@ CLient Secret:
 5v9Qg1Y(5k8rX.QcOPE0]5Rr.8N-AUC
 ```  
 
-Once you saved them, re-open the connection details by clicking on the pencil. From here, select the Live option and click Paste draft configuration.  
-Make sure `Team credentials` is selected for the Credential Type.  
+![wxo-tools-connections-filled](./assets/part_one/wxo-tools-connections-filled.png)
 
-After the you try to connect, you have to log in with the following creadentials and authorize:
+> **Notes**
 
-username: 
+> If you were creating the connection on the ServiceNow side, you would want to keep track of the `Callback URL` and probably add a `Scope`.
+
+> `Team Credentials` is instance level while `Member Credentials` is user level and would need to authenticate when the tool call is made. 
+
+> You can also `Paste draft configuration` in the `Live` or `Deployed` agent by re-opening the connection details by clicking on the pencil and selecting the `Live` option and re-authenticating. 
+
+Once you filled out the information, click `Save` and `Authenticate`.
+
+After the you try to connect, you have to login with the following creadentials and authorize:
+
+`username`: 
 ```
 admin
 ```  
-password: 
+`password`: 
 ```
 GZ%*8cmWmdB3
 ```  
+> **Notes**
+
+> **Important**
+
+> If you are viewing this after the lab and the above credentials are expired or not working, follow the steps in the [ServiceNow Setup](./servicenow-setup.md) to create a developer instance and create an application in ServiceNow.
+
+> ServiceNow implemented a change to their developer portal recently and when you try to connect it says `Failed`, this is sometimes incorrect, test the connection by going to the `Ticket Manager Agent` and typing in the `Preview` window: "I'd like to create a ticket with Priority 1 and short description: this is a test ticket" and see if it returns a ticket number/is successful. If it does, then the connection is working. 
 
 ### Building our agentic workflow 
-Click on the `hamburger` icon in the top left, then `Build`, then click into `All tools`, then click `Create tool +`, and then `Agentic workflow`
-Add `sw_validator_workflow` as the Name and click `Start Building`  
 
-![image](./assets/8.png)  
+Click on the `hamburger` icon in the top left, then `Build`.
 
-We will be implementing a basic workflow where we ask a user the price and number of licenses needed.  
+![wxo-agent-build](./assets/part_one/wxo-agent-build.png)
+
+Then click into `All tools`, then click `Create tool +`.
+
+![wxo-create-tool](./assets/part_one/wxo-create-tool.png)
+
+Click on `Agentic workflow`.
+
+![wxo-create-agentic-workflow](./assets/part_one/wxo-create-agentic-workflow.png)
+
+Add `sw_validator_workflow` (along with your initials) as the Name and click `Start Building`. 
+
+![wxo-name-agentic-flow](./assets/part_one/wxo-name-agentic-flow.png)
+
+Now, we will be implementing a basic workflow where we ask a user the price and number of licenses needed.  
+
+**Rules**:
+
 If the price is less than 0 (not possible) or greater than or equal to 10000 (too expensive), we cannot continue.  
+
 If we are able to meet the price condition, we will ask a second question about how many licenses are needed.  
+
 If we need greater than 0 and less than or equal to 1000 licenses, we can successfully continue and be prompted with a ServiceNow ticket to complete regarding this request.  
 
 #### **Step 1**. Let's begin our workflow by including a welcome message.
 
-Click on the `Add +` button, then under User Actvities, hover over `Present to user` and select `Message`  
-Now click on the the green `Message 1` box and click on the pencil to rename the message box. Paste the following in the output message 
-Output message: `Welcome! Let's validate this request!`  
+Click on the `Add +` button, then under User Actvities, hover over `Present to user` and select `Message`.
 
-![image](./assets/9.png)  
+![wxo-flows-add-message](./assets/part_one/wxo-flows-add-message.png)
+
+Now click on the the green `Message 1` box and click on the `Pencil` to rename the message box to `Welcome`. Paste the following in the output message: 
+
+`Output message`: 
+```
+Welcome! Let's validate this request!
+```  
+
+![wxo-flows-setup-message](./assets/part_one/wxo-flows-setup-message.png)
+
+> **Note**
+
+> To save simply click out of what you are editing. 
 
 #### **Step 2**. Now, click on the `+` sign between the `welcome` and `End` button. 
 
 This time, we will begin with our first question so hover over `Collect from user` and click `Number` since we will be asking for price.
-Click on the pencil icon and rename the name to `What is the USD cost for this software?`
+
+![wxo-flows-collect-number](./assets/part_one/wxo-flows-collect-number.png)
+
+Click into the `Node` and on the `Pencil` icon and rename the name.
+
+`name`:
+```
+What is the USD cost for this software?
+```
+
+![wxo-flows-setup-collecting-number](./assets/part_one/wxo-flows-setup-collecting-number.png)
+
+> **Note**
+
+> This is what is Displayed to the user: "What is the USD cost for this software?"
 
 Here's what our workflow should look like right now.  
 
-![image](./assets/10.png)  
+![wxo-flows-wxo-flows-checkin.png](./assets/part_one/wxo-flows-checkin.png)
 
 #### **Step 3**. Now we are going to track the value of the user response in a variable using a logic block so we can use this later on. 
 
 Similar to the steps above, click the `+` button under the `What is the USD cost for this software?` block. 
-Hover over `Add a flow activity` and click `Logic block`  
-You will then click on the code editor and can delete all of the pre-existing code.
-Paste `flow.private.cost = flow["User activity 1"]["What is the USD cost for this software?"].output.value`
+Hover over `Add a flow activity` and click `Logic block`.
 
-![image](./assets/11.png)  
+![wxo-flows-logic-block](./assets/part_one/wxo-flows-logic-block.png)
+
+You will then click on the `Logic block 1` and then `Open code editor` and can delete all of the pre-existing code.
+
+Paste the following in the `code editor`:
+
+`code`:
+```
+flow.private.cost = flow["User activity 1"]["What is the USD cost for this software?"].output.value
+```
+
+![wxo-flows-code-editor](./assets/part_one/wxo-flows-code-editor.png)
+
+> To save you can either click out of the code editor screen or the `X` at the top right of the `code editor` window.
 
 #### **Step 4**. Next, we will add a branch where we can actually evaluate the user input using our variable above.
 
 Similar to the steps above, click the `+` button under the `Logic Block 1` block.  
-Hover over `Add a flow control` and click `Branch`  
-Click into the `Branch 1` object and under the if else Path conditions, click `Edit condition`
-Click the `+` sign next to If and click the question under `User activity 1`
 
-![image](./assets/12.png)  
+Hover over `Add a flow control` and click `Branch`.
 
-Now click, if value >= 0, click out, and then click `Add condition +` and repeat the same but with value < 10000.  
+![wxo-flows-branch-1](./assets/part_one/wxo-flows-branch-1.png)
 
-![image](./assets/13.png)
+Click into the `Branch 1` object and under the `If` and `Else` Path conditions and click `Edit condition`.
 
-Feel free to rename **Path 1** and **Path 2** in the Branch by clicking the names directly to `Cost satisfied` and `Cost criteria not` 
+Click the `+` sign next to `If` and click the question under `User activity 1`.
+
+![wxo-flows-condition-1](./assets/part_one/wxo-flows-condition-1.png)
+
+Now click the `+` next to `if` `123 value`, set the condition: `if 123 value >= 0`. 
+
+Next, click outside and click `Add condition +`, repeat the above process but end with `and 123 value < 10000`.  
+
+![wxo-flows-condition-2](./assets/part_one/wxo-flows-condition-2.png)
+
+> Feel free to rename **Path 1** and **Path 2** in the Branch by first clicking on `Branch 1` and then `Path 1` and `Path 2` respectively. You can name them `Cost satisfied` and `Cost criteria not`.
+
 You will now see 2 different paths, based on the outcome from the above.  
 
-#### **Step 5**. Click on the green `Add +` button and follow the steps we used in step 1 
+#### **Step 5**. 
 
-![image](./assets/14.png)
+Click on the green `Add +` button and follow the steps we used in **Step 1** to create another `Present to User` `Message`. 
 
-This time, use output message: `Cost is invalid or too expensive! Criteria is not met.` and title `Cost not met`
+![wxo-flows-message-2](./assets/part_one/wxo-flows-message-2.png)
+
+This time, use output message should be:
+
+`Output Message`:
+```
+Cost is invalid or too expensive! Criteria is not met.
+```
+
+and 
+
+`title`:
+```
+Cost not met
+```
+
 Essentially, if the cost is too expensive or invalid, the user is presented this message and the flow ends. 
 
-#### **Step 6**. Under Branch 1, click the `+` button and add a follow up question. This is the case where the price critiera was met so we can continue evaluating if this request is permissible. 
+#### **Step 6**. We will now expand the Cost Satisfied Branch. This is the case where the price critiera was met so we can continue evaluating if this request is permissible. 
 
 Click `+`, hover over `Collect from user` and click `Number` since we will be asking for number of licenses.
-Follow the steps in step 2 but instead use rename the block to `How many licenses are needed?`  
+
+![wxo-flows-collect-number-2](./assets/part_one/wxo-flows-collect-number-2.png)
+
+Follow the steps in step 2 but instead use rename the block to:
+
+`Name`: 
+```
+How many licenses are needed?
+```  
+
+> This is the question that the user will see and be prompted to answer (with a Number).
+
+![wxo-flows-checkin-2](./assets/part_one/wxo-flows-checkin-2.png)
 
 #### **Step 7**. Now, we will similarly track the variable value like we did for cost, so follow the step 3
 
-![image](./assets/15.png)
+Click on the `+` under the `How many licenses are needed?` block and click `Add flow activity` and then `logic block`.
 
-You can also delete everything in the default code editor and just have this:
-`flow.private.num_licenses = flow["User activity 1"]["How many licenses are needed?"].output.value`  
+![wxo-flows-add-logic-block-2](./assets/part_one/wxo-flows-add-logic-block-2.png)
+
+From here, you will have to click back into `Logic block 2` and then `Open code editor`.
+
+You can also delete everything in the default code editor and just have the following:
+
+`code`:
+```
+flow.private.num_licenses = flow["User activity 1"]["How many licenses are needed?"].output.value
+```  
+
+> To save, click on the `X` on the top right of the `Code editor` window.
 
 #### **Step 8**. Now that we have a logic block, we will add another branch based on how many licenses are needed.  
 
-If we need 1-1000 licenses (inclusive), then criteria is met. Otherwise, we cannot continue. 
-Follow Step 4, but use value > 0 and value < 1000 instead. Here's what your branch block should include.  
+We will set up the following two paths:
 
-![image](./assets/16.png)
+Criteria is met if we need 1-1000 licenses, otherwise, we cannot continue. 
+
+Follow Step 4, but use value > 0 and value <= 1000 instead. Here's what your branch block should include.  
+
+![wxo-flows-branch-2-final](./assets/part_one/wxo-flows-branch-2-final.png)
 
 #### **Step 9**. We will follow Step 5, but instead create a criteria not met display message for our number of licenses question.
 
-Follow Step 5 but use title: `Licenses not met` and Output message: `The number of licenses is either invalid or too many! Criteria is not met.`  
+Follow Step 5 to create a `Present to User` `Message` if the Number of Licenses is criteria is not meant with
 
-![image](./assets/17.png)
+`title`: 
+```
+Licenses not met
+``` 
+
+and 
+
+`Output message`: 
+
+```
+The number of licenses is either invalid or too many! Criteria is not met.
+```  
+
+![wxo-flows-criteria-not-met-2](./assets/part_one/wxo-flows-criteria-not-met-2.png)
 
 #### **Step 10**. Let's add a display message under the path where the criteria for number of licenses was met. 
 
-Follow steps 5/9 above for how we would build a display message but use title: `Criteria met` and output message: `Criteria met! We will now fill out a ServiceNow Ticket.` 
+Follow steps 5/9 above for how we would build a `Present to User` `Message` using the 
 
-![image](./assets/18.png)  
+`title`: 
+
+```
+Criteria met
+``` 
+
+and 
+
+`Output message`: 
+
+```
+Criteria met! We will now fill out a ServiceNow Ticket.
+``` 
+
+![wxo-flows-criteria-met-message-2](./assets/part_one/wxo-flows-criteria-met-message-2.png)
 
 #### **Step 11**. The last step in completing our workflow is now adding in our ServiceNow tool. 
 
-Under the `Criteria met` box, let's add a tool call. We can do this by click `+`, `Call a tool`, and select `Create a ticket in ServiceNow`.  Click the `Done` button in the top right 
+Under the `Criteria met` `Display message` box, let's add a tool call. 
 
-![image](./assets/19.png)
+We can do this by click `+`, `Call a tool`, and search `Create a ticket in ServiceNow` and drag it into the correct space (Under `Criteria met`).
 
+> You can select whichever `Create a ticket in ServiceNow` tool if they are several, they should all work the same for this purpose.
+
+
+![wxo-flows-servicenow-tool](./assets/part_one/wxo-flows-servicenow-tool.png)
+
+Click the `Done` button in the top right.
 
 Here's what our final workflow should look like.  
 
-![image](./assets/20.png)
+![wxo-flows-final](./assets/part_one/wxo-flows-final.png)
+
+Now to implement your workflow, navigate back to the `purchase_agent` you just made by clicking `All agents` and then `purchase_agent`.
+
+![wxo-agents-home-2](./assets/part_one/wxo-agents-home-2.png)
+
+Then scroll down or click on `Toolset` and `Add tool`.
+
+![wxo-agents-add-tool](./assets/part_one/wxo-agents-add-tool.png)
+
+Click on `Local Instance`.
+
+![wxo-tools-local-instance](./assets/part_one/wxo-tools-local-instance.png)
+
+Then search `sw_validator_workflow` and find the one you made and click `Add to Agent`.
+
+![wxo-agents-add-flow](./assets/part_one/wxo-agents-add-flow.png)
 
 
+Now you are complete! Test you agent in the `Preview` window by saying:
 
+```
+Hi
+```
 
+or 
+
+```
+Hello
+```
+
+> Continue the flow following remembering what answers Met the Criteria defined above. For the 6 question form, fill it out however you want noting that only Priority and Short Description are required. I normally put `Pririotiy 1` and `Short Description: "This is a test {date} - {initials}"`. This will then populate a record in the ServiceNow application you connected.
 
 ## PART II: Building a document agent analyst to handle all document inquiries
 
-Suppose, you have different vendor documents and need ...
-In this section, we will build an agent that will use documents as a knowledge base to answer relevant questions...
-
+In this section, we will build an agent that will use documents as a knowledge base to answer relevant questions.
 
 ### watsonx Orchestrate ADK
 
 As mentioned above, the ADK allows hosting the core Orchestrate components on a developer laptop. For the lab, you will run the ADK on your own laptop. 
 
-#### Local machine
-
 To run it on your own laptop, you need to install:
-- Python 3.11 + 
+- Python 3.11 +
+> Note: Python 3.14 is currently not supported
 
-For initial setup, we recommend the following steps, but if you want to use a different virtual environment manager please refer to the steps here: [the ADK install page](https://developer.watson-orchestrate.ibm.com/getting_started/installing)
-These steps will help install the ADK, add & activate your environment, and begin building! 
+For initial setup, we recommend the following steps, but if you want to use a different virtual environment manager or run into any issues please refer to the steps here: [the ADK install page](https://developer.watson-orchestrate.ibm.com/getting_started/installing)
+
+These steps will help install the ADK, add & activate your environment to begin building! 
+
+##### Mac Setup
+###### Step 1: Install homebrew
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+###### Step 2: Install uv with either:
+```
+brew install uv
+```
+or directly with a curl command:
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+###### Step 3: Set up uv venv:
+```
+uv venv --python 3.11
+source .venv/bin/activate
+```
+
+Go to the [Install the ADK](#install-the-adk) section to continue.
+
+##### Windows Setup
+###### Step 1: Install uv
+```
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex
+```
+###### Step 2: Set up uv venv
+```
+uv venv --python 3.11
+.venv\Scripts\activate
+```
+
+#### Install and set up the ADK
+```
+uv pip install ibm-watsonx-orchestrate
+```
+
+Now you will set up an environment for the ADK. This will allow you to create and manage agents, and to run them. 
+
+First in an orchestrate window, click on your `name` in the top right and then `settings`.
+
+![wxo-settings](./assets/part_two/wxo-settings.png)
+
+Then copy and save the `Service Instance URL` and if you haven't created an `API Key` click `Generate API Key` and copy amd save that as well. 
+
+![wxo-api-details](./assets/part_two/wxo-api-details.png)
 
 
-Once you're environment is activated, you can confirm this by entering
+Now run the command to create your environment with:
+
+```
+orchestrate env add -n <your_env_name> -u <your_service_instance_url>
+```
+
+or
+
+```
+uv run orchestrate env add -n <your_env_name> -u <your_service_instance_url>
+```
+
+Now you can finally activate your environment with the following commands (you will have to paste your API key to activate):
+
+```
+orchestrate env activate <your_env_name>
+```
+
+or
+
+```
+uv run orchestrate env activate <your_env_name>
+```
+
+> Note when pasting your API Key to activate your environment, you will not see what you paste, but it will be there. 
+
+Once you're virtual environment is activated, you can confirm this by entering
 
 ```bash
 orchestrate agents list
 ```
 
-You should see a couple of agents from our previous lab portion, namely the ServiceNow ticket manager agent and the ServiceNow agent.  
+You should see a couple of agents from our previous lab portion, namely the ServiceNow `Ticket Manager Agent` and the `purchase_agent`.  
 
 
-Navigate to your repository and to the  `~/wx-orchestrate/agents` directory. you should see a YAML file called `document_agent.yaml`
+Navigate to your repository that you cloned this repo in, and to the  `~/wx-orchestrate/agents` directory. you should see a YAML file called `document_agent.yaml`
 This file is the blueprint for our agent and we will use the ADK to import this into our environment. 
 
 ![image](./assets/21.png)
@@ -426,7 +734,7 @@ This bridge allows your agent to participate in conversations and respond to use
 > more resources on this setup here: https://www.ibm.com/docs/en/watsonx/watson-orchestrate/base?topic=channels-connecting-slack
 
 First, navigate to the agent you want to use in Slack and click on `Channels` on the left-hand side. Select `Slack`, set the environment to `Draft`, and click `Create New`.
-  ![alt text](./assets/create-slack.png)
+  ![alt text](./assets/connect_slack/create-slack.png)
 
 Next, follow the steps provided in the UI to configure the Slack Interface. 
 > Once done, you will have to navigate to that workspace in slack and then @ the bot's name, it should be able to answer your questions after joining the channel.
