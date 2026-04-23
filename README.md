@@ -783,11 +783,25 @@ In this final section, we will bridge the gap between platforms by connecting ou
 This bridge allows your agent to participate in conversations and respond to user queries directly within your workspace. Allowing your agent to meet potential users where they do work with a few steps.
 > more resources on this setup here: https://www.ibm.com/docs/en/watsonx/watson-orchestrate/base?topic=channels-connecting-slack
 
-First, navigate to the agent you want to use in Slack and click on `Channels` on the left-hand side. Select `Slack`, set the environment to `Draft`, and click `Create New`.
-  ![alt text](./assets/connect_slack/create-slack.png)
+First, navigate to the agent you want to use (we recommend using the `User_Agent`) in Slack.
 
-Next, follow the steps provided in the UI to configure the Slack Interface. 
+> You can either navigate to your `Agents` by clicking on the `Hamburger` button and then `Build` or click on the following [link](https://us-south.watson-orchestrate.cloud.ibm.com/build/manage).
+
+
+Then click on `Channels` on the left-hand side. Select `Slack`, set the environment to `Draft`, and click `Create New`.
+
+![wxo-channels-slack](./assets/connect_slack/wxo-channels-slack.png)
+
+Click on `Next` and follow the steps provided in the UI to configure the Slack Interface. 
 > Once done, you will have to navigate to that workspace in slack and then @ the bot's name, it should be able to answer your questions after joining the channel.
+
+To create a Slack app, you can go to this link: [https://api.slack.com/apps](https://api.slack.com/apps) and click `Create New App`.
+
+![slack_create_new_app](./assets/connect_slack/slack_create_new_app.png)
+
+
+
+
 
 ### Connecting to OpenAI LLMs
 Now you can add external models to watsonx Orchestrate to support any existing providers (including both large and small models). To do so, use a model.yaml file and the commands below: 
