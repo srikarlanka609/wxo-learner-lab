@@ -1,6 +1,6 @@
 spec_version: v1
 style: default
-name: document_agent
+name: document_agent_mp # Change initials to your initials
 llm: watsonx/meta-llama/llama-3-2-90b-vision-instruct
 description: This agent answers questions about vendors from the provided documents.
 instructions: >
