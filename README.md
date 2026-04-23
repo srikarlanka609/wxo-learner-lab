@@ -542,20 +542,37 @@ orchestrate agents list
 
 You should see a couple of agents from our previous lab portion, namely the ServiceNow `Ticket Manager Agent` and the `purchase_agent`.  
 
+Navigate to your repository that you cloned this repo in, and to the  `~/wx-orchestrate/agents` directory. you should see a YAML file called [`document_agent.yaml`](./wx-orchestrate/agents/document_agent.yaml).
 
-Navigate to your repository that you cloned this repo in, and to the  `~/wx-orchestrate/agents` directory. you should see a YAML file called `document_agent.yaml`
-This file is the blueprint for our agent and we will use the ADK to import this into our environment. 
+To clone: 
+```
+git clone https://github.com/srikarlanka609/wxo-learner-lab.git
+```
 
-![image](./assets/21.png)
+or
 
+```
+git clone git@github.com:srikarlanka609/wxo-learner-lab.git
+```
+
+Then 
+```
+cd wxo-learner-lab/wx-orchestrate/agents
+```
+
+[This file](./wx-orchestrate/agents/document_agent.yaml) is the blueprint for our agent and we will use the ADK to import this into our environment. 
+
+Click into it/open the yaml file and add your initials after the `name`.
+
+![document_agent_yaml](./assets/part_two/document_agent_yaml.png)
 
 Run the following command to import this agent into the environment: 
 ```bash
 orchestrate agents import -f document_agent.yaml
 ```
-You should see the following message
 
-![image](./assets/22.png)
+You should see the following message
+![document_agent_import](./assets/part_two/document_agent_import.png)
 
 
 ### Modify agent in the UI
